@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://bshonails.cm/sitemap.xml
+Sitemap: https://b-shonails.vercel.app/sitemap.xml
 
 # Disallow empty or irrelevant paths (if any)
 # Disallow: /admin/
@@ -37,4 +37,4 @@ User-agent: Twitterbot
 Allow: /
 
 # Host declaration (helps with canonicalization)
-Host: https://bshonails.cm 
+Host: https://b-shonails.vercel.app 
