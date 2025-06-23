@@ -438,6 +438,51 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Fonction pour forcer la lecture vidéo sur mobile
+    function initializeMobileVideo() {
+        const heroVideo = document.querySelector('.hero-video video');
+        if (!heroVideo) return;
+        
+        // Détecter si on est sur mobile
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (isMobile) {
+            // Forcer les attributs nécessaires pour iOS
+            heroVideo.setAttribute('playsinline', 'true');
+            heroVideo.setAttribute('webkit-playsinline', 'true');
+            heroVideo.setAttribute('muted', 'true');
+            heroVideo.muted = true;
+            
+            // Tentative de lecture automatique après un court délai
+            setTimeout(() => {
+                heroVideo.play().catch(e => {
+                    console.log('Autoplay bloqué sur mobile:', e);
+                    // Fallback : essayer de lire quand l'utilisateur interagit
+                    document.addEventListener('touchstart', function playOnTouch() {
+                        heroVideo.play().catch(e => console.log('Lecture vidéo échouée:', e));
+                        document.removeEventListener('touchstart', playOnTouch);
+                    }, { once: true });
+                });
+            }, 1000);
+            
+            // Réessayer la lecture quand la vidéo est prête
+            heroVideo.addEventListener('loadeddata', function() {
+                if (heroVideo.paused) {
+                    heroVideo.play().catch(e => console.log('Lecture vidéo échouée:', e));
+                }
+            });
+            
+            // S'assurer que la vidéo continue de jouer
+            heroVideo.addEventListener('pause', function() {
+                setTimeout(() => {
+                    if (heroVideo.paused) {
+                        heroVideo.play().catch(e => console.log('Relance vidéo échouée:', e));
+                    }
+                }, 100);
+            });
+        }
+    }
+    
     // Hover effects for service cards
     function initializeServiceCardEffects() {
         const serviceCards = document.querySelectorAll('.service-card');
@@ -611,7 +656,8 @@ document.addEventListener('DOMContentLoaded', function() {
         initializeDateTimePickers();
         initializePhoneFormatting();
         initializeServiceCardClicks();
-        initializeGallery(); // Nouvelle fonction
+        initializeGallery();
+        initializeMobileVideo(); // Nouvelle fonction pour mobile
         
         // Initial animation check
         animateOnScroll();

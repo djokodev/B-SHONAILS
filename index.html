@@ -75,9 +75,12 @@
     <!-- Hero Section -->
     <section class="hero" id="home">
         <div class="hero-video">
-            <video autoplay muted loop>
+            <video autoplay muted loop playsinline webkit-playsinline preload="metadata" poster="espace1.webp">
                 <source src="maquillage_video.mp4" type="video/mp4">
+                Your browser does not support the video tag.
             </video>
+            <!-- Fallback image pour mobile si vidéo ne fonctionne pas -->
+            <div class="hero-fallback-image" style="display: none; background-image: url('espace1.webp');"></div>
             <div class="hero-overlay"></div>
         </div>
         
@@ -86,9 +89,7 @@
                 <h1 class="hero-title">
                     <span class="title-main">B-SHONAILS</span>
                     <span class="title-sub">BEAUTY SALON & SPA</span>
-                </h1>
-                <p class="hero-subtitle">Luxury beauty, expert care!</p>
-                <!-- <p class="hero-description">
+                </h1>                <!-- <p class="hero-description">
                     Découvrez l'excellence en beauté dans notre salon luxueux à Douala. 
                     Des soins exceptionnels dans un cadre raffiné.
                 </p> -->
