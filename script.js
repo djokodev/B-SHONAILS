@@ -440,47 +440,85 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Fonction pour forcer la lecture vidéo sur mobile
     function initializeMobileVideo() {
-        const heroVideo = document.querySelector('.hero-video video');
-        if (!heroVideo) return;
-        
         // Détecter si on est sur mobile
         const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         
         if (isMobile) {
-            // Forcer les attributs nécessaires pour iOS
-            heroVideo.setAttribute('playsinline', 'true');
-            heroVideo.setAttribute('webkit-playsinline', 'true');
-            heroVideo.setAttribute('muted', 'true');
-            heroVideo.muted = true;
+            // Initialiser la vidéo hero
+            const heroVideo = document.querySelector('.hero-video video');
+            if (heroVideo) {
+                setupMobileVideo(heroVideo, true); // true pour hero (avec fallback touch)
+            }
             
-            // Tentative de lecture automatique après un court délai
-            setTimeout(() => {
-                heroVideo.play().catch(e => {
-                    console.log('Autoplay bloqué sur mobile:', e);
-                    // Fallback : essayer de lire quand l'utilisateur interagit
-                    document.addEventListener('touchstart', function playOnTouch() {
-                        heroVideo.play().catch(e => console.log('Lecture vidéo échouée:', e));
-                        document.removeEventListener('touchstart', playOnTouch);
-                    }, { once: true });
-                });
-            }, 1000);
-            
-            // Réessayer la lecture quand la vidéo est prête
-            heroVideo.addEventListener('loadeddata', function() {
-                if (heroVideo.paused) {
-                    heroVideo.play().catch(e => console.log('Lecture vidéo échouée:', e));
-                }
-            });
-            
-            // S'assurer que la vidéo continue de jouer
-            heroVideo.addEventListener('pause', function() {
-                setTimeout(() => {
-                    if (heroVideo.paused) {
-                        heroVideo.play().catch(e => console.log('Relance vidéo échouée:', e));
-                    }
-                }, 100);
+            // Initialiser les vidéos des services
+            const serviceVideos = document.querySelectorAll('.service-video');
+            serviceVideos.forEach(video => {
+                setupMobileVideo(video, false); // false pour services (pas de fallback touch)
             });
         }
+    }
+    
+    // Fonction pour configurer une vidéo spécifique pour mobile
+    function setupMobileVideo(video, enableTouchFallback = false) {
+        if (!video) return;
+        
+        // Forcer les attributs nécessaires pour iOS
+        video.setAttribute('playsinline', 'true');
+        video.setAttribute('webkit-playsinline', 'true');
+        video.setAttribute('muted', 'true');
+        video.muted = true;
+        
+        // Tentative de lecture automatique après un court délai
+        setTimeout(() => {
+            video.play().catch(e => {
+                console.log('Autoplay bloqué sur mobile pour une vidéo:', e);
+                
+                // Fallback touch uniquement pour la vidéo hero
+                if (enableTouchFallback) {
+                    document.addEventListener('touchstart', function playOnTouch() {
+                        video.play().catch(e => console.log('Lecture vidéo échouée:', e));
+                        document.removeEventListener('touchstart', playOnTouch);
+                    }, { once: true });
+                }
+                
+                // Pour les vidéos services, essayer de lire au survol/interaction avec la card
+                if (!enableTouchFallback) {
+                    const serviceCard = video.closest('.service-card');
+                    if (serviceCard) {
+                        serviceCard.addEventListener('touchstart', function() {
+                            video.play().catch(e => console.log('Lecture vidéo service échouée:', e));
+                        }, { once: true });
+                    }
+                }
+            });
+        }, 1000);
+        
+        // Réessayer la lecture quand la vidéo est prête
+        video.addEventListener('loadeddata', function() {
+            if (video.paused) {
+                video.play().catch(e => console.log('Lecture vidéo échouée au loadeddata:', e));
+            }
+        });
+        
+        // S'assurer que la vidéo continue de jouer
+        video.addEventListener('pause', function() {
+            setTimeout(() => {
+                if (video.paused) {
+                    video.play().catch(e => console.log('Relance vidéo échouée:', e));
+                }
+            }, 100);
+        });
+        
+        // Optimisation: forcer la lecture quand la vidéo devient visible
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && video.paused) {
+                    video.play().catch(e => console.log('Lecture vidéo sur intersection échouée:', e));
+                }
+            });
+        }, { threshold: 0.5 });
+        
+        observer.observe(video);
     }
     
     // Hover effects for service cards

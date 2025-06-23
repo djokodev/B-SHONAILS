@@ -329,6 +329,18 @@ body {
         min-height: 100%;
     }
     
+    /* Optimisations pour les vidéos des services sur mobile */
+    .service-video {
+        /* Force l'affichage et la lecture sur mobile */
+        display: block !important;
+        -webkit-transform: translateZ(0);
+        transform: translateZ(0);
+        /* Assurer que les vidéos prennent tout l'espace de leur conteneur */
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover !important;
+    }
+    
     /* Réduire la hauteur hero sur mobile pour de meilleures performances */
     .hero {
         height: 70vh;

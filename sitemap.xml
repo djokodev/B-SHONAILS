@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+    
+    <!-- Page d'accueil -->
+    <url>
+        <loc>https://bshonails.cm/</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>1.0</priority>
+        <image:image>
+            <image:loc>https://bshonails.cm/logo.jpg</image:loc>
+            <image:title>B-SHONAILS Beauty Salon & Spa Logo</image:title>
+            <image:caption>Logo du salon de beauté B-SHONAILS à Douala</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://bshonails.cm/espace1.webp</image:loc>
+            <image:title>Espace salon de beauté luxueux</image:title>
+            <image:caption>Intérieur élégant du salon B-SHONAILS</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://bshonails.cm/ongles1.png</image:loc>
+            <image:title>Manucure professionnelle</image:title>
+            <image:caption>Service de manucure de qualité à Douala</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://bshonails.cm/soins_visage_3.jpg</image:loc>
+            <image:title>Soins du visage professionnel</image:title>
+            <image:caption>Traitement facial de luxe au salon B-SHONAILS</image:caption>
+        </image:image>
+        <image:image>
+            <image:loc>https://bshonails.cm/oeil.jpg</image:loc>
+            <image:title>Extensions de cils</image:title>
+            <image:caption>Service d'extensions de cils professionnel</image:caption>
+        </image:image>
+    </url>
+    
+    <!-- Section Services -->
+    <url>
+        <loc>https://bshonails.cm/#services</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.9</priority>
+    </url>
+    
+    <!-- Section À Propos -->
+    <url>
+        <loc>https://bshonails.cm/#about</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <!-- Section Galerie -->
+    <url>
+        <loc>https://bshonails.cm/#gallery</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.7</priority>
+    </url>
+    
+    <!-- Section Témoignages -->
+    <url>
+        <loc>https://bshonails.cm/#testimonials</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.6</priority>
+    </url>
+    
+    <!-- Section Contact -->
+    <url>
+        <loc>https://bshonails.cm/#contact</loc>
+        <lastmod>2025-01-03</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+</urlset> 

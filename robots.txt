@@ -1,0 +1,40 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://bshonails.cm/sitemap.xml
+
+# Disallow empty or irrelevant paths (if any)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Allow important resources
+Allow: *.css
+Allow: *.js
+Allow: *.jpg
+Allow: *.jpeg
+Allow: *.png
+Allow: *.webp
+Allow: *.gif
+Allow: *.svg
+Allow: *.mp4
+Allow: *.webm
+
+# Crawl-delay (optional)
+# Crawl-delay: 1
+
+# Specific instructions for search engines
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: facebookexternalhit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /
+
+# Host declaration (helps with canonicalization)
+Host: https://bshonails.cm 
